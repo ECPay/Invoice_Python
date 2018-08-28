@@ -25,29 +25,29 @@ ecpay_invoice.Send['Items'].append({
     'ItemName': '商品名稱一',
     'ItemCount': 1,
     'ItemWord': '批',
-    'ItemPrice': 50,
+    'ItemPrice': 2052.0,
     'ItemTaxType': '',
-    'ItemAmount': 50,
+    'ItemAmount': 2155,
     'ItemRemark': '商品備註一'
 })
 ecpay_invoice.Send['Items'].append({
     'ItemName': '商品名稱二',
     'ItemCount': 1,
     'ItemWord': '批',
-    'ItemPrice': 150,
+    'ItemPrice': 1692.0,
     'ItemTaxType': '',
-    'ItemAmount': 150,
+    'ItemAmount': 1777,
     'ItemRemark': '商品備註二'
 })
-ecpay_invoice.Send['Items'].append({
-    'ItemName': '商品名稱三',
-    'ItemCount': 1,
-    'ItemWord': '批',
-    'ItemPrice': 200,
-    'ItemTaxType': '',
-    'ItemAmount': 200,
-    'ItemRemark': '商品備註三'
-})
+# ecpay_invoice.Send['Items'].append({
+#     'ItemName': '商品名稱三',
+#     'ItemCount': 1,
+#     'ItemWord': '批',
+#     'ItemPrice': 2052,
+#     'ItemTaxType': '',
+#     'ItemAmount': 2155,
+#     'ItemRemark': '商品備註三'
+# })
 
 RelateNumber = 'ECPAY' + time.strftime("%Y%m%d%H%M%S", time.localtime()) + str(
 random.randint(1000000000, 2147483647))  # 產生測試用自訂訂單編號
@@ -55,7 +55,7 @@ ecpay_invoice.Send['RelateNumber'] = RelateNumber
 ecpay_invoice.Send['CustomerID'] = ''
 ecpay_invoice.Send['CustomerIdentifier'] = '12345678'
 ecpay_invoice.Send['CustomerName'] = 'test'
-ecpay_invoice.Send['CustomerAddr'] = 'test'
+ecpay_invoice.Send['CustomerAddr'] = 'test   zzz'
 ecpay_invoice.Send['CustomerPhone'] = ''
 ecpay_invoice.Send['CustomerEmail'] = 'test@local.com'
 ecpay_invoice.Send['ClearanceMark'] = ''
@@ -65,10 +65,10 @@ ecpay_invoice.Send['LoveCode'] = ''
 ecpay_invoice.Send['CarruerType'] = ''
 ecpay_invoice.Send['CarruerNum'] = ''
 ecpay_invoice.Send['TaxType'] = '1'
-ecpay_invoice.Send['SalesAmount'] = 400
+ecpay_invoice.Send['SalesAmount'] = 3931
 ecpay_invoice.Send['InvoiceRemark'] = 'SDK TEST Python V1.0.6'
 ecpay_invoice.Send['InvType'] = '07'
-ecpay_invoice.Send['vat'] = ''
+ecpay_invoice.Send['vat'] = '0'
 
 # 4. 送出
 aReturn_Info = ecpay_invoice.Check_Out()

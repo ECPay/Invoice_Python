@@ -21,7 +21,10 @@
 
 
 ## 2. 安裝環境
-  
+	利用pip
+	pip install ecpay_invoice3
+	匯入模組
+	from ecpay_invoice.ecpay_main import *
 
 ## 3. 使用教學
   - 請參考demo目錄下的使用範例

@@ -177,7 +177,7 @@ class ECPay_Invoice_Send():
     def urlencode_process(arParameters=dict, urlencode_field=dict):
         for key, val in arParameters.items():
             if key in urlencode_field:
-                arParameters[key] = urllib.parse.quote(val)
+                arParameters[key] = urllib.parse.quote_plus(val)
                 arParameters[key] = ECPay_CheckMacValue.do_str_replace(arParameters[key])
         return arParameters
 
@@ -225,7 +225,6 @@ class ECPay_Invoice_Send():
             if key in urlencode_field:
                 arParameters[key] = ECPay_CheckMacValue.restore_str_replace(arParameters[key])
                 arParameters[key] = urllib.parse.unquote_plus(val)
-
         return arParameters
 
 

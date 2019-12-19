@@ -55,6 +55,7 @@ class EcpayInvoice():
         self.Send['InvoiceTag'] = ''
         self.Send['Notified'] = ''
         self.Send['BarCode'] = ''
+        self.Send['ReturnURL '] = ''
         self.Send['OnLine'] = True
         self.TimeStamp = int(time.time())
 
@@ -517,6 +518,113 @@ class ECPay_ALLOWANCE():
         'NotifyMail': '',
         'NotifyPhone': '',
         'AllowanceAmount': ''
+    })
+    # 需要做urlencode的參數
+    urlencode_field = dict({
+        'CustomerName': '',
+        'NotifyMail': '',
+        'ItemName': '',
+        'ItemWord': ''
+    })
+
+    # 不需要送壓碼的欄位
+    none_verification = dict({
+        'ItemName': '',
+        'ItemWord': '',
+        'CheckMacValue': ''
+    })
+
+    '''
+    *1寫入參數
+    '''
+
+    def insert_string(self, arParameters=dict):
+        nItems_Count_Total = 0
+        nItems_Foreach_Count = 1
+        sItemName = ''
+        sItemCount = ''
+        sItemWord = ''
+        sItemPrice = ''
+        sItemTaxType = ''
+        sItemAmount = ''
+
+        # Python特性，需要複製一個字典，不然回修改到原先宣告的字典的key與value
+        parameters = self.parameters.copy()
+
+        for key, val in parameters.items():
+            if key in arParameters:
+                parameters[key] = arParameters[key]
+        # 商品資訊組合
+        nItems_Count_Total = len(arParameters['Items'])  # 商品總筆數
+        if nItems_Count_Total != 0:
+            for val2 in arParameters['Items']:
+                sItemName += val2['ItemName'] if 'ItemName' in val2 else ''
+                sItemCount += str(val2['ItemCount'])
+                sItemWord += val2['ItemWord'] if 'ItemWord' in val2 else ''
+                sItemPrice += str(val2['ItemPrice'])
+                sItemTaxType += str(val2['ItemTaxType']) if 'ItemTaxType' in val2 else ''
+                sItemAmount += str(val2['ItemAmount'])
+
+                if nItems_Foreach_Count < nItems_Count_Total:
+                    sItemName += '|'
+                    sItemCount += '|'
+                    sItemWord += '|'
+                    sItemPrice += '|'
+                    sItemTaxType += '|'
+                    sItemAmount += '|'
+
+                nItems_Foreach_Count += 1
+        parameters['ItemName'] = sItemName  # 商品名稱
+        parameters['ItemCount'] = sItemCount
+        parameters['ItemWord'] = sItemWord  # 商品單位
+        parameters['ItemPrice'] = sItemPrice
+        parameters['ItemTaxType'] = sItemTaxType
+        parameters['ItemAmount'] = sItemAmount
+        return parameters
+
+    '''
+    * 2-2 驗證參數格式
+    '''
+
+    def check_extend_string(self, arParameters=dict):
+
+        # 刪除items
+        del arParameters['Items']
+
+        return arParameters
+
+    '''
+    *4欄位例外處理方式(送壓碼前)
+    '''
+
+    def check_exception(self, arParameters=dict):
+        return arParameters
+
+'''
+*  C線上開立折讓(通知開立) 
+'''
+
+
+class ECPay_AllowanceByCollegiate():
+    # 所需參數
+    parameters = dict({
+        'TimeStamp': '',
+        'MerchantID': '',
+        'CustomerName': '',
+        'Items': list(),
+        'ItemName': '',
+        'ItemCount': '',
+        'ItemWord': '',
+        'ItemPrice': '',
+        'ItemTaxType': '',
+        'ItemAmount': '',
+        'CheckMacValue': '',
+        'InvoiceNo': '',
+        'AllowanceNotify': '',
+        'NotifyMail': '',
+        'NotifyPhone': '',
+        'AllowanceAmount': '',
+        'ReturnURL':''
     })
     # 需要做urlencode的參數
     urlencode_field = dict({

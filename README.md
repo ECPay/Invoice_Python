@@ -28,6 +28,8 @@
 
 ## 3. 使用教學
   - 請參考demo目錄下的使用範例
+   - SDK 適用綠界B2C電子發票API文件2.2.10之前版本, 不適用於3.0.0以後版本
+  - 串接網址 正式環境 https://einvoice.ecpay.com.tw/Invoice
 
 
 
